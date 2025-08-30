@@ -1,0 +1,92 @@
+# ============================
+# FastAPI / Python
+# ============================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pkl
+*.log
+
+# Ignorar entornos virtuales
+.venv/
+venv/
+env/
+.mivenv/
+
+# Configuración de entorno
+*.env
+
+# Compilación / Distribución
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Cache de pytest y coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.mypy_cache/
+.dmypy.json
+.dmypy/
+.pyre/
+.pytype/
+
+# ============================
+# Vue 3 / Node.js
+# ============================
+node_modules/
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Archivos de build de Vue
+*.local
+*.cache
+*.temp
+*.tmp
+*.log
+*.bak
+*.swp
+
+# Editor y sistema operativo
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# ============================
+# Otros
+# ============================
+# Logs generales
+logs/
+*.log
+
+# Archivos de migración (si usas Alembic en FastAPI)
+alembic/versions/*.pyc
+alembic/versions/__pycache__/

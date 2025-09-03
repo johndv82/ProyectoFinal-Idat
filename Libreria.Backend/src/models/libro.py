@@ -13,5 +13,6 @@ class Libro(Base):
     precio = Column(Float, nullable=False)
     activo = Column(Boolean, default=True)
     fecha_ingreso = Column(DateTime, default=datetime.now)
+    portada = Column(String(250), nullable=False)
 
     ventas = relationship("LibroVenta", back_populates="libro")

@@ -1,3 +1,4 @@
+from typing import List
 from fastapi import APIRouter, HTTPException, Depends
 from sqlalchemy.orm import Session
 from src.schemas.venta_sch import VentaCreate, VentaOut
@@ -13,9 +14,9 @@ def registrar_venta(venta: VentaCreate, db: Session = Depends(get_db)):
         raise HTTPException(status_code=400, detail="Stock insuficiente o libro no encontrado")
     return resultado
 
-@router.get("/{venta_id}", response_model=VentaOut)
-def obtener_venta(venta_id: int, db: Session = Depends(get_db)):
-    venta = venta_service.obtener_venta(db, venta_id)
+@router.get("/{cliente_id}", response_model=List[VentaOut])
+def obtener_ventas_cliente(cliente_id: int, db: Session = Depends(get_db)):
+    venta = venta_service.obtener_ventas_cliente(db, cliente_id)
     if not venta:
         raise HTTPException(status_code=404, detail="Venta no encontrada")
     return venta

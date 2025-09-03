@@ -4,7 +4,7 @@ from src.models.cliente import Cliente
 from src.models.libro import Libro
 from src.models.libroventa import LibroVenta
 from src.schemas.venta_sch import VentaCreate, LibroVentaOut, VentaOut
-from typing import Optional
+from typing import List, Optional
 
 def registrar_venta(db: Session, venta_data: VentaCreate):
     cliente = db.query(Cliente).filter(Cliente.id == venta_data.cliente_id).first()
@@ -46,24 +46,28 @@ def registrar_venta(db: Session, venta_data: VentaCreate):
         libros=resumen
     )
 
-def obtener_venta(db: Session, venta_id: int):
-    venta = db.query(Venta).filter(Venta.id == venta_id).first()
-    if not venta:
-        return None
+def obtener_ventas_cliente(db: Session, cliente_id: int) -> List[VentaOut]:
+    ventas = db.query(Venta).filter(Venta.cliente_id == cliente_id).all()
+    if not ventas:
+        return []
 
-    resumen = []
+    resultado = []
 
-    for lv in venta.libros:
-        resumen.append(LibroVentaOut(
-            libro_id=lv.libro.id,
-            titulo=lv.libro.titulo,
-            cantidad=lv.cantidad,
-            precio_unitario=lv.libro.precio
+    for venta in ventas:
+        resumen = []
+        for lv in venta.libros:
+            resumen.append(LibroVentaOut(
+                libro_id=lv.libro.id,
+                titulo=lv.libro.titulo,
+                cantidad=lv.cantidad,
+                precio_unitario=lv.libro.precio
+            ))
+
+        resultado.append(VentaOut(
+            id=venta.id,
+            cliente_id=venta.cliente_id,
+            fecha=venta.fecha,
+            libros=resumen
         ))
 
-    return VentaOut(
-        id=venta.id,
-        cliente_id=venta.cliente_id,
-        fecha=venta.fecha,
-        libros=resumen
-    )
+    return resultado

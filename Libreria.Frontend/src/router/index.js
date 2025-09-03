@@ -25,6 +25,11 @@ const routes = [
     path: '/pedidos',
     name: 'Pedidos',
     component: () => import('../views/Pedidos.vue')
+  },
+    {
+    path: '/mantlibros',
+    name: 'MantenimientoLibros',
+    component: () => import('../views/AdminLibros.vue')
   }
 ]
 

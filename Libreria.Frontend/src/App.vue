@@ -5,6 +5,7 @@ import { computed } from "vue";
 
 import LoginModal from "@/components/LoginModal.vue";
 import RegisterModal from "@/components/RegisterModal.vue";
+import ToastContainer from "@/components/ToastContainer.vue";
 
 const auth = useAuthStore();
 const isAuthenticated = computed(() => auth.isAuthenticated);
@@ -17,7 +18,7 @@ const showRegister = ref(false);
 <template>
   <nav class="navbar is-info" role="navigation" aria-label="main navigation" >
     <div class="navbar-brand">
-      <a class="navbar-item" href="/">
+      <a class="navbar-item">
         <img class="logo" src="@/assets/logo.png" />
         New Book
       </a>
@@ -28,6 +29,7 @@ const showRegister = ref(false);
         <router-link class="navbar-item" to="/">Inicio</router-link>
         <router-link class="navbar-item" to="/carrito">Carrito</router-link>
         <router-link class="navbar-item" to="/pedidos">Pedidos</router-link>
+        <router-link class="navbar-item" to="/mantlibros">Mant. Libros</router-link>
       </div>
 
       <div class="navbar-end">
@@ -58,4 +60,6 @@ const showRegister = ref(false);
 
   <LoginModal v-if="showLogin" @close="showLogin = false" />
   <RegisterModal v-if="showRegister" @close="showRegister = false" />
+
+  <ToastContainer />
 </template>

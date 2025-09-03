@@ -1,12 +1,11 @@
 from fastapi import FastAPI
-from src.core.database import engine
+from src.core.database_sqlite import engine
 from src.models import Base
 from src.api import clientes, libros, ventas, auth
 from fastapi.middleware.cors import CORSMiddleware
 
-Base.metadata.create_all(bind=engine)
-
 app = FastAPI(title="Librería API")
+
 
 # habilitamos CORS
 origins = [

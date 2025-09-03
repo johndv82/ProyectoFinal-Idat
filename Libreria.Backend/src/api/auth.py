@@ -42,4 +42,4 @@ def login(
             headers={"WWW-Authenticate": "Basic"},
         )
 
-    return {"message": f"Bienvenido {user.username}"}
+    return {"message": f"Bienvenido {user.username}", "user_id": user.id}

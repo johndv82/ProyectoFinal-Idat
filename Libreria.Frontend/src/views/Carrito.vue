@@ -8,6 +8,7 @@ const cart = useCartStore();
 const auth = useAuthStore();
 const mensaje = ref("");
 const user_id = computed(() => auth.user_id);
+const isAuthenticated = computed(() => auth.isAuthenticated);
 
 function increase(item) {
   if (item.cantidad < 3) {

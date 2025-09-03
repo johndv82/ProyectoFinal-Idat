@@ -20,7 +20,7 @@ const fetchLibros = async () => {
       ? { q: query.value }
       : {};
 
-    const response = await api.get("/libros", { params });
+    const response = await api.get("/libros/", { params });
     libros.value = response.data;
   } catch (error) {
     console.error("Error cargando libros", error);

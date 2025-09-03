@@ -3,13 +3,16 @@ from src.models.venta import Venta
 from src.models.cliente import Cliente
 from src.models.libro import Libro
 from src.models.libroventa import LibroVenta
+from src.models.usuario import Usuario
 from src.schemas.venta_sch import VentaCreate, LibroVentaOut, VentaOut
 from typing import List, Optional
 
 def registrar_venta(db: Session, venta_data: VentaCreate):
     cliente = db.query(Cliente).filter(Cliente.id == venta_data.cliente_id).first()
     if not cliente:
-        return None
+        usuario = db.query(Usuario).filter(Usuario.id == venta_data.cliente_id).first()
+        if not usuario:
+            return None
 
     nueva_venta = Venta(cliente_id=venta_data.cliente_id)
     db.add(nueva_venta)

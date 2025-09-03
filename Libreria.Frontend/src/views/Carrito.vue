@@ -116,14 +116,15 @@ async function procesarCompra() {
             {{ cart.totalItems }} artículo(s)
           </p>
 
-
-          <button
-            class="button is-primary mt-4"
-            @click="procesarCompra"
-            :disabled="cart.items.length === 0"
-            >
-            Procesar Compra
+          <div v-if="isAuthenticated">
+            <button class="button is-primary mt-4" @click="procesarCompra" :disabled="cart.items.length === 0">
+              Procesar Compra
             </button>
+          </div>
+          <div v-else>
+             Primero debe iniciar sesión para procasar la compra.
+          </div>
+
 
         </div>
 

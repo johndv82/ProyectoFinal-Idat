@@ -13,6 +13,8 @@ def crear_libro(libro: LibroCreate, db: Session = Depends(get_db)):
 
 @router.get("/", response_model=List[LibroOut])
 def buscar_libros(q: str = Query(default="", description="Buscar por título o autor"), db: Session = Depends(get_db)):
+    if not q:
+        return libro_service.get_all_libros(db)
     return libro_service.find_libros(db, q)
 
 @router.get("/", response_model=List[LibroOut])

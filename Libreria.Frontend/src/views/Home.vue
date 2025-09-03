@@ -16,9 +16,11 @@ function agregar(libro) {
 
 const fetchLibros = async () => {
   try {
-    const response = await api.get("/libros", {
-      params: { q: query.value },
-    });
+    const params = query.value?.trim()
+      ? { q: query.value }
+      : {};
+
+    const response = await api.get("/libros", { params });
     libros.value = response.data;
   } catch (error) {
     console.error("Error cargando libros", error);

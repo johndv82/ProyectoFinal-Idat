@@ -2,8 +2,7 @@
 import { useAuthStore } from "@/stores/auth";
 import { computed } from "vue";
 import { ref, onMounted } from "vue";
-import axios from "axios";
-
+import api from "@/api";
 
 const auth = useAuthStore();
 
@@ -14,8 +13,7 @@ const isAuthenticated = computed(() => auth.isAuthenticated);
 
 async function cargarPedidos() {
   try {
-    const res = await axios.get(
-      `http://localhost:8000/ventas/${auth.user_id}`
+    const res = await api.get(`/ventas/${auth.user_id}`
     );
     pedidos.value = Array.isArray(res.data) ? res.data : [];
   } catch (err) {
@@ -26,7 +24,9 @@ async function cargarPedidos() {
 }
 
 onMounted(() => {
-  cargarPedidos();
+    if(auth.isAuthenticated){
+        cargarPedidos();
+    }
 });
 
 </script>

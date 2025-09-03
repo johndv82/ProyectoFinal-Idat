@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import axios from "axios";
+import api from "@/api";
 
 const libros = ref([]);
 
@@ -21,7 +21,7 @@ const messageType = ref("is-success");
 // Cargar libros
 async function cargarLibros() {
   try {
-    const res = await axios.get("http://localhost:8000/libros/");
+    const res = await api.get("/libros/");
     libros.value = res.data;
   } catch (err) {
     console.error(err);
@@ -42,10 +42,10 @@ function editarLibro(libro) {
 async function guardarLibro() {
   try {
     if (form.value.id) {
-      await axios.put(`http://localhost:8000/libros/${form.value.id}`, form.value);
+      await api.put(`/libros/${form.value.id}`, form.value);
       message.value = "Libro actualizado correctamente";
     } else {
-      await axios.post("http://localhost:8000/libros/", form.value);
+      await api.post("/libros/", form.value);
       message.value = "Libro creado correctamente";
     }
     showModal.value = false;
@@ -62,7 +62,7 @@ async function guardarLibro() {
 async function eliminarLibro(id) {
   if (!confirm("¿Estás seguro de eliminar este libro?")) return;
   try {
-    await axios.delete(`http://localhost:8000/libros/${id}`);
+    await api.delete(`/libros/${id}`);
     message.value = "Libro eliminado correctamente";
     await cargarLibros();
     setTimeout(() => (message.value = ""), 3000);

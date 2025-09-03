@@ -2,7 +2,7 @@
 import { useCartStore } from "@/stores/cart";
 import { useAuthStore } from "@/stores/auth";
 import { ref, computed } from "vue";
-import axios from "axios";
+import api from "@/api";
 
 const cart = useCartStore();
 const auth = useAuthStore();
@@ -28,7 +28,7 @@ function removeItem(id) {
 async function procesarCompra() {
   try {
     const payload = cart.toVentaPayload(user_id.value);
-    const res = await axios.post("http://localhost:8000/ventas/", payload);
+    const res = await api.post("/ventas/", payload);
 
     mensaje.value = `Compra registrada. ID: ${res.data.id}`;
     cart.clearCart();

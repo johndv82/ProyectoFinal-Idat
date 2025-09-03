@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import axios from "axios";
+import api from "@/api";
 import { useCartStore } from "@/stores/cart";
 import { useToast } from "@/composables/useToast";
 
@@ -16,7 +16,7 @@ function agregar(libro) {
 
 const fetchLibros = async () => {
   try {
-    const response = await axios.get("http://localhost:8000/libros", {
+    const response = await api.get("/libros", {
       params: { q: query.value },
     });
     libros.value = response.data;

@@ -3,6 +3,7 @@ from src.core.database_sqlite import engine
 from src.models import Base
 from src.api import clientes, libros, ventas, auth
 from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware.httpsredirect import HTTPSRedirectMiddleware
 
 app = FastAPI(title="Librería API")
 
@@ -21,6 +22,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# redirige http:// → https:// automáticamente
+app.add_middleware(HTTPSRedirectMiddleware)
 
 app.include_router(clientes.router)
 app.include_router(libros.router)

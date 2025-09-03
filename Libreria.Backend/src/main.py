@@ -5,7 +5,7 @@ from src.api import clientes, libros, ventas, auth
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.httpsredirect import HTTPSRedirectMiddleware
 
-app = FastAPI(title="Librería API")
+app = FastAPI(title="Librería API", redirect_slashes=False)
 
 # habilitamos CORS
 origins = [
